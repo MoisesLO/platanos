@@ -42,9 +42,25 @@ class MealItem extends StatelessWidget {
             child: Image.asset(meal.image, fit: BoxFit.cover),
           ),
           Expanded(
-              child: Column(children: [
-                Text(meal.name, maxLines: 2)
-              ],
+              child: Column(
+            children: [
+              Text(
+                meal.name,
+                maxLines: 2,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13
+                ),
+              ),
+              Text(
+                meal.weight,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 11,
+                    color: Colors.grey
+                ),
+              )
+            ],
           ))
         ],
       ),

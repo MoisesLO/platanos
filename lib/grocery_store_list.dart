@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:platanos/grocery_provider.dart';
-import 'package:platanos/main.dart';
+import 'package:platanos/meal.dart';
 
 class GroceryStoreList extends StatelessWidget {
   @override
@@ -8,11 +8,9 @@ class GroceryStoreList extends StatelessWidget {
     final bloc = GroceryProvider.of(context).bloc;
     return StaggeredDualView(
       itemBuilder: (context, index) {
-        return MealItem(
-          meal: meals[index]
-        );
+        return MealItem(meal: meals[index]);
       },
-        itemCount: meals.length,
+      itemCount: meals.length,
     );
     /*
     return ListView.builder(
@@ -37,20 +35,30 @@ class MealItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Card(
+      child: Column(
+        children: [
+          Expanded(
+            child: Image.asset(meal.image, fit: BoxFit.cover),
+          ),
+          Expanded(
+              child: Column(children: [
+                Text(meal.name, maxLines: 2)
+              ],
+          ))
+        ],
+      ),
+    );
   }
 }
 
-
 class StaggeredDualView extends StatelessWidget {
   const StaggeredDualView(
-      {
-        Key key,
-        @required this.itemBuilder,
-        @required this.itemCount,
-        this.spacing = 0.0,
-        this.aspectRatio = 0.5
-      })
+      {Key key,
+      @required this.itemBuilder,
+      @required this.itemCount,
+      this.spacing = 0.0,
+      this.aspectRatio = 0.5})
       : super(key: key);
 
   final IndexedWidgetBuilder itemBuilder;
@@ -62,11 +70,10 @@ class StaggeredDualView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: aspectRatio,
-        crossAxisSpacing: spacing,
-        mainAxisSpacing: spacing
-      ),
+          crossAxisCount: 2,
+          childAspectRatio: aspectRatio,
+          crossAxisSpacing: spacing,
+          mainAxisSpacing: spacing),
       itemBuilder: itemBuilder,
     );
   }

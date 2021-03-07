@@ -21,7 +21,7 @@ class App extends StatelessWidget {
   }
 }
 
-const _backgrounColor = Color(0XFFF6F5F2);
+const backgrounColor = Color(0XFFF6F5F2);
 const cartBarHeight = 100.0;
 const _panelTransition = Duration(milliseconds: 500);
 
@@ -83,15 +83,17 @@ class _HomePageState extends State<HomePage> {
                           right: 0,
                           top: _getTopForWhitePanel(bloc.groceryState, size),
                           height: size.height - kToolbarHeight,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
+                          child: ClipRRect(
                               borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(30),
                                   bottomRight: Radius.circular(30)
                               ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                              ),
+                              child: GroceryStoreList(),
                             ),
-                            child: GroceryStoreList(),
                           ),
                         ),
                         AnimatedPositioned(
@@ -125,7 +127,7 @@ class _AppBarGrocery extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: kToolbarHeight,
-      color: _backgrounColor,
+      color: backgrounColor,
       child: Row(
         children: [
           BackButton(color: Colors.black),
